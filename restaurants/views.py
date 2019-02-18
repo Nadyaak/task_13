@@ -7,7 +7,6 @@ from django.db.models import Q
 
 # This view will be used to favorite a restaurant
 def restaurant_favorite(request, restaurant_id):
-
    if request.user.is_anonymous:
        return redirect('signin')
    restaurant_obj =Restaurant.objects.get(id=restaurant_id)
@@ -28,13 +27,7 @@ def favorite_restaurants(request):
    if request.user.is_anonymous:
        return redirect('signin')
    like_restaurants = FavoriteRestaurant.objects.filter(user= request.user)
-   #like_restaurants = FavoriteRestaurant.objects.filter(user= request.user).values_list('restaurant_id' ,flat=True)
-   # like_restaurant_obj = []
-   # for item in like_restaurants :
-   #     obj = Restaurant.objects.get(id=item)
-   #     like_restaurant_obj.append(obj)
    context ={
-        #" like_restaurant_obj": like_restaurant_obj
         "like_restaurants" : like_restaurants}
    return render(request, 'Flist.html', context)
 
